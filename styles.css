@@ -707,3 +707,38 @@ body {
     font-size: 1.4rem;
   }
 }
+@media (max-width: 768px) {
+
+  .container {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .header-inner {
+    flex-direction: column;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .hero-title {
+    font-size: 28px;
+  }
+
+  .four-column-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .col-block,
+  .card {
+    width: 100%;
+  }
+}
