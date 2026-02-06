@@ -300,5 +300,28 @@
   </footer>
 
   <script src="app.js"></script>
+  <!-- Fallback navigation script -->
+  <script>
+    // Simple fallback if app.js doesn't load
+    (function() {
+      setTimeout(function() {
+        const buttons = document.querySelectorAll('.btn-top[href^="#"]');
+        if (buttons.length > 0) {
+          buttons.forEach(function(btn) {
+            btn.addEventListener('click', function(e) {
+              const href = this.getAttribute('href');
+              const target = document.querySelector(href);
+              if (target) {
+                e.preventDefault();
+                const headerHeight = 120;
+                const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+              }
+            });
+          });
+        }
+      }, 100);
+    })();
+  </script>
 </body>
 </html>

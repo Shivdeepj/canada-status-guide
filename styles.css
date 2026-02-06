@@ -156,7 +156,8 @@ body {
   color: #fff;
   padding: 2.25rem 0 2.75rem;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  z-index: 100;
 }
 
 .header::before {
@@ -173,7 +174,7 @@ body {
 .header .container,
 .header-container {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   max-width: 1100px;
 }
 
@@ -193,6 +194,8 @@ body {
 .header-right {
   flex: 0 1 340px;
   min-width: 0;
+  position: relative;
+  z-index: 20;
 }
 
 .logo {
@@ -289,6 +292,8 @@ body {
   display: grid;
   gap: 0.65rem;
   margin-top: 0;
+  position: relative;
+  z-index: 30;
 }
 
 .btn-top {
@@ -305,11 +310,24 @@ body {
   border-radius: 12px;
   box-shadow: 0 3px 10px rgba(0, 0, 0, 0.18);
   transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+  touch-action: manipulation;
+  user-select: none;
+  position: relative;
+  z-index: 10;
 }
 
-.btn-top:hover {
+.btn-top:hover,
+.btn-top:active,
+.btn-top:focus {
   transform: translateY(-3px) scale(1.01);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  outline: none;
+}
+
+.btn-top:active {
+  transform: translateY(-1px) scale(0.99);
 }
 
 .btn-students { background: #bee3f8; border-color: #2b6cb0; color: #1a365d; }
@@ -336,7 +354,8 @@ body {
 /* Sections (from PDF) */
 .section {
   padding: 2rem 0;
-  scroll-margin-top: 1rem;
+  scroll-margin-top: 120px; /* More space for header on mobile */
+  scroll-padding-top: 120px;
 }
 
 .section:nth-child(even) {
@@ -707,38 +726,71 @@ body {
     font-size: 1.4rem;
   }
 }
+/* Mobile: stack header, make buttons full width, ensure sections accessible */
 @media (max-width: 768px) {
-
-  .container {
-    width: 95%;
-    padding: 10px;
-  }
-
-  .header-inner {
+  .header-container {
     flex-direction: column;
+    gap: 1.25rem;
   }
 
-  .nav {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .hero-title {
-    font-size: 28px;
-  }
-
-  .four-column-row {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .cards {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .col-block,
-  .card {
+  .header-left,
+  .header-right {
+    flex: 1 1 100%;
     width: 100%;
+  }
+
+  .header-right {
+    order: -1; /* Buttons appear first on mobile */
+  }
+
+  .top-buttons {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .btn-top {
+    font-size: 0.9rem;
+    padding: 0.85rem 1rem;
+    text-align: left;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+  }
+
+  .author-name {
+    font-size: 1.35rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .headline {
+    font-size: 1.15rem;
+  }
+
+  .key-tip-box {
+    margin-top: 0.75rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .section {
+    padding: 1.5rem 0;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+  }
+
+  .card {
+    padding: 1.25rem 1.15rem;
+  }
+
+  /* Ensure sections are accessible when clicking buttons */
+  .section {
+    scroll-margin-top: 120px;
+    scroll-padding-top: 120px;
+  }
+  
+  html {
+    scroll-behavior: smooth;
   }
 }

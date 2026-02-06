@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Test - Canada Status Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background: #f0f0f0;
+    }
+    .test-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      background: #2c5282;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+    }
+    .section {
+      min-height: 500px;
+      padding: 40px 20px;
+      margin: 20px 0;
+      background: white;
+      border: 2px solid #2c5282;
+    }
+    .status {
+      padding: 10px;
+      margin: 10px 0;
+      background: #e6f0f7;
+      border-left: 4px solid #2c5282;
+    }
+  </style>
+</head>
+<body>
+  <h1>Mobile Navigation Test</h1>
+  
+  <div class="status" id="status">Ready to test</div>
+  
+  <nav>
+    <a href="#section1" class="test-btn">Test Button 1 → Section 1</a>
+    <a href="#section2" class="test-btn">Test Button 2 → Section 2</a>
+    <a href="#section3" class="test-btn">Test Button 3 → Section 3</a>
+    <a href="#section4" class="test-btn">Test Button 4 → Section 4</a>
+  </nav>
+  
+  <section id="section1" class="section">
+    <h2>Section 1 - Study Permit</h2>
+    <p>If you clicked Button 1 and scrolled here, navigation works!</p>
+  </section>
+  
+  <section id="section2" class="section">
+    <h2>Section 2 - Work Permit</h2>
+    <p>If you clicked Button 2 and scrolled here, navigation works!</p>
+  </section>
+  
+  <section id="section3" class="section">
+    <h2>Section 3 - Visitor Status</h2>
+    <p>If you clicked Button 3 and scrolled here, navigation works!</p>
+  </section>
+  
+  <section id="section4" class="section">
+    <h2>Section 4 - Vulnerable Worker</h2>
+    <p>If you clicked Button 4 and scrolled here, navigation works!</p>
+  </section>
+  
+  <script>
+    document.querySelectorAll('.test-btn').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        const target = document.querySelector(href);
+        if (target) {
+          document.getElementById('status').textContent = 'Clicked: ' + href + ' - Scrolling...';
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          setTimeout(function() {
+            document.getElementById('status').textContent = 'Success! Scrolled to ' + href;
+          }, 500);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
